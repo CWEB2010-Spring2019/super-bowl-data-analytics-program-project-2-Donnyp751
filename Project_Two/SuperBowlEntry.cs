@@ -14,7 +14,7 @@ namespace Project_Two
         public string WinningTeam { get; set; }
         public string WinningCoach { get; set; }
         public string WinningQB { get; set; }
-        public DateTime DateTime { get; set; }
+        public DateTime Date { get; set; }
         public string SuperbowlNumerial { get; set; }
         public int Attendance { get; set; }
         public int WinningPoints { get; set; }
@@ -32,11 +32,13 @@ namespace Project_Two
         {
             this.originalEntry = entryText;
             string[] fields = entryText.Split(',');
-            if (fields.Length != 15)
+            if (!(fields.Length >=15 && fields.Length <=16))
             {
                 throw new Exception("INVALID ENTRY");
             }
-            this.DateTime = convertToDateTime(fields[0]);
+
+            //this.date = fields[0];
+            this.Date = convertToDateTime(fields[0]);
             this.SuperbowlNumerial = fields[1];
             this.Attendance = Convert.ToInt32(fields[2]);
             this.WinningQB = fields[3];
@@ -57,9 +59,9 @@ namespace Project_Two
         private DateTime convertToDateTime(string date)
         {
             string[] parts = date.Split('-');
-            if (Convert.ToInt32(parts[2]) == 0)
+            if(Convert.ToInt32(parts[2]) < 60) //There wasn't a superbowl before the 60's so it must be in the 2000's
             {
-                throw new Exception("INVALID ENTRY");
+                parts[2] = "20" + parts[2];
             }
             return new DateTime(Convert.ToInt32(parts[2]), monthsLutList.IndexOf(parts[1])+1, Convert.ToInt32(parts[0]));
         }
