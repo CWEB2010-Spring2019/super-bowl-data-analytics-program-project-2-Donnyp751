@@ -14,7 +14,16 @@ namespace Project_Two
             * or guide them through generating the file.
             **/
 
+            Console.WriteLine("Enter input file path, or press enter for default path");
+            string inputFileName = Console.ReadLine();
+            string outputFileName = @"..\..\..\..\Super_Bowl_Project_Output.txt";
+
             string fileName = @"..\..\..\..\Super_Bowl_Project.csv";
+
+            if (File.Exists(inputFileName))
+            {
+                fileName = inputFileName;
+            }
 
             List<string> rawData = File.ReadAllText(fileName).Split('\n', StringSplitOptions.RemoveEmptyEntries).ToList();
             List<SuperBowlEntry> entries = new List<SuperBowlEntry>();
@@ -44,16 +53,16 @@ namespace Project_Two
                     Console.WriteLine("INVALID CHOICE");
             } while (!selected);
 
-            Console.WriteLine("Enter file name");
-            string outputFileName = Console.ReadLine();
+            Console.WriteLine("Enter output file name");
 
-            //entries.ForEach(entry => Console.WriteLine(entry.ToString()));
+            string OutFileName = Console.ReadLine();
+            if (File.Exists(outputFileName))
+            {
+                //outputFileName = OutFileName;
+                var SuperBowlSorter = new SuperBowlQuery(entries);
 
-            var SuperBowlSorter = new SuperBowlQuery(entries);
-
-            
-
-
+                SuperBowlSorter.WriteTXTFile(outputFileName);
+            }
         }
     }
 }
