@@ -88,17 +88,89 @@ namespace Project_Two
             outputText += "\r\n\r\n";
             outputText += FormatLine(PlaceHolderWidth * 6, new[] { "######MVP's more then once######" });
 
-            var MVPMoreThenOnce = Entries.Where(e => Entries.Where(z => z.MVP == e.MVP).Count() > 1).ToList();
+            var MVPMoreThenOnce = Entries.Where(e => Entries.Where(z => z.MVP == e.MVP).Count() > 1).ToList();           
 
             foreach (var mvp in MVPMoreThenOnce)
             {
-                Console.Write(mvp.MVP);
+                outputText += FormatLine(PlaceHolderWidth,
+                    new[]
+                    {
+                        mvp.MVP, mvp.WinningTeam, mvp.LosingTeam
+                    });
             }
+
+            outputText += "\r\n\r\n";
+            outputText += FormatLine(PlaceHolderWidth, new[] { "######Coach that lost the most######" });
+
+            //var coachGroups = Entries.GroupBy(e => e.LosingCoach).OrderByDescending(e=>e.Count()).Take(1);
+
+            var groupsOfLosingCoaches = from groups in
+                from entry in Entries
+                group entry by entry.LosingCoach
+                orderby groups.Count() descending select groups;
+
+            outputText += FormatLine(PlaceHolderWidth, new[] { groupsOfLosingCoaches.First().Key });
+
+
+            outputText += "\r\n\r\n";
+            outputText += FormatLine(PlaceHolderWidth, new[] { "######Coach that won the most######" });
+
+            var groupsOfWinningCoaches = from groups in
+                    from entry in Entries
+                    group entry by entry.WinningCoach
+                orderby groups.Count() descending
+                select groups;
+
+            outputText += FormatLine(PlaceHolderWidth, new[] { groupsOfWinningCoaches.First().Key });
+
+
+            outputText += "\r\n\r\n";
+            outputText += FormatLine(PlaceHolderWidth, new[] { "######Team that won the most######" });
+
+            var groupsOfWinningTeams = from groups in
+                    from entry in Entries
+                    group entry by entry.WinningTeam
+                orderby groups.Count() descending
+                select groups;
+
+            outputText += FormatLine(PlaceHolderWidth, new[] { groupsOfWinningTeams.First().Key });
+
+
+            outputText += "\r\n\r\n";
+            outputText += FormatLine(PlaceHolderWidth, new[] { "######Team that lost the most######" });
+
+            var groupsOfLosingTeams = from groups in
+                    from entry in Entries
+                    group entry by entry.LosingTeam
+                orderby groups.Count() descending
+                select groups;
+
+            outputText += FormatLine(PlaceHolderWidth, new[] { groupsOfLosingTeams.First().Key });
+
+            outputText += "\r\n\r\n";
+            outputText += FormatLine(PlaceHolderWidth, new[] { "######Largest point difference######" });
+
+            var pointsDifference =
+                from entry in Entries
+                orderby entry.WinningPoints - entry.LosingPoints descending
+                select entry;
+
+            outputText += FormatLine(PlaceHolderWidth, new[] { (pointsDifference.First().WinningPoints - pointsDifference.First().LosingPoints).ToString() });
+
+
+            outputText += "\r\n\r\n";
+            outputText += FormatLine(PlaceHolderWidth, new[] { "######Average attendance of all Superbowls######" });
+
+            var avg = Entries.Average(e => e.Attendance);
+
+            outputText += FormatLine(PlaceHolderWidth, new[] { Math.Round(avg).ToString() });
+             
 
             File.WriteAllText(fileName, outputText);
             return false;
         }
 
+        
         private string FormatLine(int placeHolderSpace, string[] columns)
         {
             string line = string.Empty;

@@ -67,3 +67,40 @@
 
 
                                                                           ######MVP's more then once######                                                                          
+          Bart Starr                Green Bay Packers             Kansas City Chiefs      
+          Bart Starr                Green Bay Packers              Oakland Raiders        
+        Terry Bradshaw             Pittsburgh Steelers              Dallas Cowboys        
+        Terry Bradshaw             Pittsburgh Steelers             Los Angeles Rams       
+         Joe Montana               San Francisco 49ers            Cincinnati Bengals      
+         Joe Montana               San Francisco 49ers              Miami Dolphins        
+         Joe Montana               San Francisco 49ers              Denver Broncos        
+          Tom Brady                New England Patriots             St. Louis Rams        
+          Tom Brady                New England Patriots           Carolina Panthers       
+         Eli Manning                 New York Giants             New England Patriots     
+         Eli Manning                 New York Giants             New England Patriots     
+          Tom Brady                New England Patriots            Seattle Seahawks       
+          Tom Brady                New England Patriots            Atlanta Falcons        
+
+
+######Coach that lost the most######
+          Don Shula           
+
+
+######Coach that won the most######
+        Bill Belichick        
+
+
+######Team that won the most######
+     Pittsburgh Steelers      
+
+
+######Team that lost the most######
+        Denver Broncos        
+
+
+######Largest point difference######
+              45              
+
+
+######Average attendance of all Superbowls######
+            77649             
